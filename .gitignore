@@ -1,0 +1,7 @@
+# Ignore node_modules directories in both frontend and backend
+/Frontend/node_modules/
+/Backend/node_modules/
+
+# Misc
+.DS_Store
+.env

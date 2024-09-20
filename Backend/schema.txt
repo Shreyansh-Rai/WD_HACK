@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS directories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    path VARCHAR(1024) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS file_types (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS files (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,          -- Added column to store the file name
+    path VARCHAR(1024) NOT NULL,
+    type_id INT,
+    caption TEXT,
+    ocr_text TEXT,
+    directory_id INT,
+    FOREIGN KEY (type_id) REFERENCES file_types(id),
+    FOREIGN KEY (directory_id) REFERENCES directories(id)
+);
+
+CREATE TABLE IF NOT EXISTS embeddings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    file_id INT,
+    embedding_type VARCHAR(255),
+    embedding_data LONGBLOB,
+    FOREIGN KEY (file_id) REFERENCES files(id)
+);
