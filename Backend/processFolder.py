@@ -193,11 +193,15 @@ def process_folder():
     if request.method == "OPTIONS":
         return '', 204  # Respond OK to preflight
     data = request.json
-    folder_path = "C:\\Users\\Shreyansh\\Desktop\\TestWDFolder"
+    gotpath = "C:/" + data['path']
+    gotpath = os.path.normpath(gotpath)
+    gotpath = gotpath.replace('shreyanshrai', 'Shreyansh')
+    print("GOTPATH : ", gotpath)
+    # folder_path = "C:\\Users\\Shreyansh\\Desktop\\TestWDFolder"
+    folder_path = gotpath
     print("Got request, ", request.json)
     if not folder_path:
         return jsonify({"error": "No folder path provided"}), 400
-
     api_url = "http://localhost:8001/permit-list/"
     output_file = "response.json"
 
