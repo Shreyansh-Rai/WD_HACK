@@ -1,102 +1,101 @@
 /* Style for the form */
 form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px; /* Adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px; /* Adjust as needed */
 }
 
 /* Style for the input wrapper */
 .inputPromptWrapper {
-    display: flex;
-    align-items: center;
-    border-radius: 30px; /* Rounded corners */
-    background-color: #2f2f2f; /* Dark background */
-    padding: 4px; /* Padding inside the wrapper */
-    width: 90%; /* Adjusted width of the input wrapper */
-    max-width: 800px; /* Maximum width */
+  display: flex;
+  align-items: center;
+  border-radius: 30px; /* Rounded corners */
+  background-color: #2f2f2f; /* Dark background */
+  padding: 4px; /* Padding inside the wrapper */
+  width: 90%; /* Adjusted width of the input wrapper */
+  max-width: 800px; /* Maximum width */
 }
 
 /* Style for the textarea */
 .inputPrompttTextarea {
-    flex: 1;
-    padding: 12px 20px; /* Increased padding for distance from edges */
-    border: none;
-    font-size: large;
-    border-radius: 20px; /* Rounded corners */
-    background-color: transparent; /* Transparent background */
-    color: #fff; /* Text color */
-    outline: none; /* Remove outline */
-    resize: none; /* Disable manual resizing */
-    min-height: 26px; /* Minimum height */
-    max-height: 40px; /* Maximum height */
-    transition: width 0.2s ease; /* Smooth transition */
+  flex: 1;
+  padding: 12px 20px; /* Increased padding for distance from edges */
+  border: none;
+  font-size: large;
+  border-radius: 20px; /* Rounded corners */
+  background-color: transparent; /* Transparent background */
+  color: #fff; /* Text color */
+  outline: none; /* Remove outline */
+  resize: none; /* Disable manual resizing */
+  min-height: 26px; /* Minimum height */
+  max-height: 40px; /* Maximum height */
+  transition: width 0.2s ease; /* Smooth transition */
 }
 
 /* Auto-resize textarea */
 .inputPrompttTextarea:focus {
-    width: 100%; /* Full width on focus */
+  width: 100%; /* Full width on focus */
 }
 
 /* Placeholder styling */
 .inputPrompttTextarea::placeholder {
-    color: #ADACBF; /* Placeholder color */
-    opacity: 1; /* Ensure full opacity */
-    font-size: large;
+  color: #ADACBF; /* Placeholder color */
+  opacity: 1; /* Ensure full opacity */
+  font-size: large;
 }
 
 /* Style for the submit button */
 .submitButton {
-    background: transparent; /* No background color */
-    border: none; /* No border */
-    cursor: pointer; /* Pointer cursor on hover */
-    padding: 0; /* Remove padding */
-    margin-left: 12px; /* Space between input and icon */
+  background: transparent; /* No background color */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 0; /* Remove padding */
+  margin-left: 12px; /* Space between input and icon */
 }
 
 /* Style for the arrow icon */
 .arrowIcon {
-    width: 36px; /* Default size */
-    height: 36px;
-    transition: transform 0.2s; /* Smooth transition for scaling */
+  width: 36px; /* Default size */
+  height: 36px;
+  transition: transform 0.2s; /* Smooth transition for scaling */
 }
 
 .arrowIcon:hover {
-    transform: scale(1.2); /* Increase size on hover */
+  transform: scale(1.1); /* Increase size on hover */
 }
 
 
 .appName {
-    color: #ffffff; /* Text color */
-    font-size: 24px; /* Adjust size as needed */
-    margin-bottom: 20px; /* Space below the title */
-    text-align: left; /* Left align the text */
-  }
-  
-  .firstLetter {
-    font-size: 32px; /* Increase size of the first letter */
-    font-weight: bold; /* Make the first letter bold */
-  }
-  
-  .animatedText {
-    display: inline; /* Inline to keep it in the same line */
-    transition: opacity 2s ease; /* Transition for opacity */
-  }
-  
-  .fade-in {
-    opacity: 1; /* Fully visible */
-  }
-  
-  .fade-out {
-    opacity: 0; /* Fully transparent */
-  }
-  
-  
+  color: #ffffff; /* Text color */
+  font-size: 24px; /* Adjust size as needed */
+  margin-bottom: 20px; /* Space below the title */
+  text-align: left; /* Left align the text */
+}
+
+.firstLetter {
+  font-size: 32px; /* Increase size of the first letter */
+  font-weight: bold; /* Make the first letter bold */
+}
+
+.animatedText {
+  display: inline; /* Inline to keep it in the same line */
+  transition: opacity 2s ease; /* Transition for opacity */
+}
+
+.fade-in {
+  opacity: 1; /* Fully visible */
+}
+
+.fade-out {
+  opacity: 0; /* Fully transparent */
+}
+
+
 
 
 /* Overlay for the modal */
 
-  
-  
-  
-  
+
+
+

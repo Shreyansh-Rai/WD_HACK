@@ -8,7 +8,7 @@ const NavLinks = ({ svg, link, text, setChatLog }) => {
   const { dispatch } = useContext(AuthContext);
 
   const handleClick = async (text) => {
-    if (text === "Clear Conversations") setChatLog([]);
+    // if (text === "Clear Conversations") setChatLog([]);
     if (text === "Log out") {
       try {
         let logOut = await signOut(auth);

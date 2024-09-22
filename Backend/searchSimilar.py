@@ -97,7 +97,6 @@ def respond():
     
     embedding = get_text_embedding(input_text)
     top_paths = find_top_three_embeddings(embedding)
-
     return jsonify({"file_paths": top_paths})
 
 if __name__ == "__main__":

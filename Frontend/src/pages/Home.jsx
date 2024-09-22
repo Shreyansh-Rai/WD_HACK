@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useRef, useState } from "react";
 import Avatar from "../components/Avatar";
 import BotResponse from "../components/BotResponse";
@@ -7,6 +9,7 @@ import Loading from "../components/Loading";
 import NavContent from "../components/NavContent";
 import { ReactComponent as ArrowIcon } from '../arrow.svg'; // Adjust the path accordingly
 import "./Home.css";
+import FileCard from "../pages/FileCard";
 
 const Home = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -25,13 +28,13 @@ const Home = () => {
     if (!responseFromAPI && inputPrompt.trim() !== "") {
       const newChatLogEntry = { id: Date.now(), chatPrompt: inputPrompt, botMessage: null }; // Ensure unique ID
       setChatLog((prevChatLog) => [...prevChatLog, newChatLogEntry]);
-  
+
       // Hide the keyboard on mobile devices
-      // e.target.querySelector("input").blur();
-  
+      e.target.querySelector("textarea").blur(); // Fixed to target textarea instead of input
+
       setInputPrompt(""); // Clear input after submitting
       setResponseFromAPI(true); // Indicate that a response is being awaited
-  
+
       // Simulate a delay to mimic API call
       setTimeout(async () => {
         try {
@@ -41,34 +44,38 @@ const Home = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: inputPrompt }),
           });
-  
+          console.log("Response", response)
           const resp = await response.json();
           console.log(resp.file_paths)
           const data = resp
-  
-          // Update chat log with the API response or mock response
-          setChatLog((prevChatLog) => [
-            ...prevChatLog.slice(0, prevChatLog.length - 1), // All entries except the last
-            { 
-              ...newChatLogEntry, 
-              botMessage: "Top Matches are:\n" + 
-                [...new Set(data.file_paths)] // Remove duplicates
-                  .map((path, index) => `${index + 1}) ${path}`)
-                  .join("\n")
-            } // Update the last entry with the formatted and unique file paths
-          ]);
-  
+          console.log("LIST:\n")
+          setChatLog((prevChatLog) => {
+            const uniqueFilePaths = [...new Set(data.file_paths)]; // Remove duplicates using Set
+          
+            const updatedChatLog = [
+              ...prevChatLog.slice(0, prevChatLog.length - 1), // Keep previous chat logs
+              {
+                ...newChatLogEntry,
+                botMessage: uniqueFilePaths // Store the deduplicated array
+              }
+            ];
+          
+            console.log("Updated chat log:", updatedChatLog); // Log the updated chat log
+            return updatedChatLog;
+          });
+
+
           setErr(false); // No errors, set err to false
         } catch (error) {
           setErr(true); // Handle error case
           console.error("API call failed:", error);
         } finally {
+          console.log("Response from API complete");
           setResponseFromAPI(false); // Reset after receiving the response
         }
       }, 1000);
     }
   };
-  
 
   // Change animated text at intervals
   useEffect(() => {
@@ -97,6 +104,7 @@ const Home = () => {
       });
     }
   }, [chatLog]);
+
 
   return (
     <>
@@ -149,9 +157,9 @@ const Home = () => {
         <h2 className="appName">
           <span className="firstLetter">S</span>mart{" "}
           <span className={`animatedText ${fade ? 'fade-out' : 'fade-in'}`}>
-            <span className="firstLetter">{animatedText.charAt(0)}</span>
-            {animatedText.slice(1)}
-          </span>
+  <span className="firstLetter">{animatedText.charAt(0)}</span>
+  {animatedText.slice(1)}
+</span>
         </h2> {/* Display animated text */}
         <NavContent
           chatLog={chatLog}
@@ -168,7 +176,7 @@ const Home = () => {
                 {/* User message */}
                 <div className="chatPromptMainContainer">
                   <div className="chatPromptWrapper">
-                    <Avatar bg="#5437DB" className="userSVG">
+                    <Avatar bg="#F2F0EF" className="userSVG">
                       {/* User avatar */}
                     </Avatar>
                     <div id="chatPrompt">{chat.chatPrompt}</div>
@@ -177,16 +185,25 @@ const Home = () => {
                 {/* Bot response */}
                 <div className="botMessageMainContainer">
                   <div className="botMessageWrapper">
-                    <Avatar bg="#11a27f" className="openaiSVG">
+                    <Avatar bg="#b2f0e8" className="openaiSVG">
                       {/* Bot avatar */}
                     </Avatar>
-                    {chat.botMessage === "Loading..." ? (
+                    {chat.botMessage ? (
+                      Array.isArray(chat.botMessage) ? (
+                        <div id="botMessage">
+                          {chat.botMessage.map((path, index) => (
+                            <FileCard key={index} path={path} />
+                          ))}
+                        </div>
+                      ) : (
+                        <div id="botMessage">{chat.botMessage}</div> // Handle non-array messages
+                      )
+                    ) : responseFromAPI ? (
                       <Loading />
                     ) : err ? (
                       <Error err={err} />
-                    ) : (
-                      <div id="botMessage">{chat.botMessage}</div>
-                    )}
+                    ) : null}
+
                   </div>
                 </div>
               </div>
